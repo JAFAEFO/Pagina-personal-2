@@ -222,8 +222,8 @@ function toggleMenu() {
     let menu = document.getElementById("menu");
     menu.style.left = (menu.style.left === "0px") ? "-220px" : "0px";
 }
-
-/* 📱 SWIPE PRO */
+    
+/* 📱 SWIPE SOLO PARA MENÚ */
 let startX = 0;
 let startY = 0;
 
@@ -239,15 +239,23 @@ document.addEventListener("touchend", e => {
     let dx = endX - startX;
     let dy = endY - startY;
 
-    if (Math.abs(dx) > 100 && Math.abs(dx) > Math.abs(dy)) {
-        if (dx < 0) {
-            index = (index + 1) % secciones.length;
-        } else {
-            index = (index - 1 + secciones.length) % secciones.length;
+    // 👉 solo horizontal y más de 80px
+    if (Math.abs(dx) > 80 && Math.abs(dx) > Math.abs(dy)) {
+
+        let menu = document.getElementById("menu");
+
+        // 👉 swipe derecha = abrir menú
+        if (dx > 0) {
+            menu.style.left = "0px";
         }
-        mostrar(secciones[index]);
+
+        // 👉 swipe izquierda = cerrar menú
+        else {
+            menu.style.left = "-220px";
+        }
     }
 });
+
 </script>
 
 <script>
