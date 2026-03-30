@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
+html, body {
     margin: 0;
+    overflow-x: hidden;
     font-family: Arial, sans-serif;
     color: white;
-    overflow: hidden;
 }
 
 /* 🎬 VIDEO */
@@ -75,15 +75,15 @@ body {
 /* 📦 SECCIONES */
 .seccion {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     top: 0;
     left: 0;
     padding-top: 100px;
     text-align: center;
 
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
 
     opacity: 0;
@@ -102,7 +102,7 @@ body {
     pointer-events: auto;
 }
 
-/* 💖 TEXTO ORIGINAL */
+/* 💖 TEXTO */
 h1, p {
     text-shadow: 2px 2px 10px black;
 }
@@ -144,12 +144,36 @@ h1, p {
     margin-bottom: 10px;
 }
 
-/* 🎮 BOTONES */
+/* 🎮 BOTONES PRO */
+.controles {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+}
+
 .controles button {
-    padding: 10px 15px;
-    margin: 5px;
-    font-size: 18px;
+    border: none;
+    padding: 12px 16px;
+    margin: 10px;
+    font-size: 20px;
+    border-radius: 50%;
     cursor: pointer;
+
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    color: white;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.controles button:hover {
+    transform: scale(1.2);
+    background: rgba(0,255,255,0.3);
+}
+
+.controles button:active {
+    transform: scale(0.95);
 }
 
 /* ✨ CANVAS */
@@ -197,30 +221,25 @@ canvas {
     <h1>Weeeeell, esta sera la nueva pagina de Yalex</h1>
 </div>
 
-<!-- 💖 GABY -->
 <div id="gaby" class="seccion">
     <h1>💖 Para Mi Mujel 💖</h1>
 
     <div class="contenedor-cartas" id="slider">
 
-        <!-- 💌 CARTA 1 -->
         <div class="carta-item active">
             <div class="carta-texto" id="carta1"></div>
         </div>
 
-        <!-- 📸 CARTA -->
         <div class="carta-item">
             <img src="foto1.jpg" class="carta-img">
             <div class="carta-texto">💖 Este momento contigo fue increíble...</div>
         </div>
 
-        <!-- 📸 CARTA -->
         <div class="carta-item">
             <img src="foto2.jpg" class="carta-img">
             <div class="carta-texto">Nunca olvidaré este día contigo 💕</div>
         </div>
 
-        <!-- 💌 CARTA -->
         <div class="carta-item">
             <div class="carta-texto">Eres mi lugar favorito en todo el mundo 🌎💖</div>
         </div>
@@ -281,7 +300,7 @@ function toggleMenu() {
     menu.style.left = (menu.style.left === "0px") ? "-220px" : "0px";
 }
 
-/* 📱 SWIPE MENÚ */
+/* SWIPE MENÚ */
 let startX = 0;
 document.addEventListener("touchstart", e => {
     startX = e.touches[0].clientX;
@@ -334,7 +353,7 @@ function cambiarCarta(direccion) {
     cartas[cartaIndex].classList.add("active");
 }
 
-/* 📱 SWIPE CARTAS */
+/* SWIPE CARTAS */
 let slider = document.getElementById("slider");
 let startSwipe = 0;
 
