@@ -12,16 +12,18 @@ body {
     color: white;
 }
 
-/* 🎥 VIDEO */
+/* 🎬 VIDEO */
 #bg-video {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     z-index: -1;
 }
 
-/* ☰ BOTÓN MENÚ */
+/* ☰ BOTÓN */
 .menu-btn {
     position: fixed;
     top: 15px;
@@ -38,12 +40,11 @@ body {
     left: -220px;
     width: 220px;
     height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     padding-top: 60px;
     transition: 0.3s;
 }
 
-/* BOTONES */
 .menu button {
     display: flex;
     align-items: center;
@@ -61,14 +62,13 @@ body {
     background: cyan;
 }
 
-/* ICONO IMAGEN */
 .icono-img {
     width: 25px;
     height: 25px;
     object-fit: contain;
 }
 
-/* SECCIONES */
+/* 📦 SECCIONES */
 .seccion {
     display: none;
     padding-top: 100px;
@@ -79,7 +79,12 @@ body {
     display: block;
 }
 
-/* CARTA */
+/* 💖 TEXTO */
+h1, p {
+    text-shadow: 2px 2px 8px black;
+}
+
+/* 💖 CARTA */
 #carta {
     max-width: 500px;
     margin: auto;
@@ -89,11 +94,34 @@ body {
     white-space: pre-line;
 }
 
+/* ✨ CANVAS */
 canvas {
     position: fixed;
     top: 0;
     left: 0;
     pointer-events: none;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 1.8em;
+        padding: 0 10px;
+    }
+
+    p {
+        font-size: 1em;
+        padding: 0 15px;
+    }
+
+    .seccion {
+        padding-top: 80px;
+    }
+
+    .menu-btn {
+        font-size: 25px;
+    }
 }
 </style>
 </head>
@@ -101,7 +129,7 @@ canvas {
 <body>
 
 <!-- 🎬 VIDEO -->
-<video autoplay muted loop id="bg-video">
+<video autoplay muted loop playsinline id="bg-video">
     <source src="video.mp4" type="video/mp4">
 </video>
 
@@ -149,6 +177,7 @@ canvas {
     <h1>Margarita</h1>
 </div>
 
+<!-- 🧠 JS MENÚ -->
 <script>
 function mostrar(seccion) {
     document.querySelectorAll('.seccion').forEach(s => s.classList.remove('active'));
@@ -160,6 +189,17 @@ function toggleMenu() {
     let menu = document.getElementById("menu");
     menu.style.left = (menu.style.left === "0px") ? "-220px" : "0px";
 }
+</script>
+
+<!-- 🎬 FIX VIDEO CELULAR -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const video = document.getElementById("bg-video");
+    video.muted = true;
+    video.play().catch(() => {
+        console.log("Autoplay bloqueado");
+    });
+});
 </script>
 
 <!-- 💖 CARTA -->
@@ -191,8 +231,12 @@ escribir();
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
 
 let elementos = [];
 
