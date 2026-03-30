@@ -1,136 +1,150 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Yalex</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Yalex</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            color: white;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+}
 
-        /* 🎥 VIDEO DE FONDO */
-        #bg-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
+/* 🎥 VIDEO */
+#bg-video {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
 
-        /* 🔝 NAVBAR */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.6);
-            padding: 10px;
-            text-align: center;
-            z-index: 10;
-        }
+/* ☰ BOTÓN MENÚ */
+.menu-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 10;
+}
 
-        .navbar button {
-            margin: 5px;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            border-radius: 8px;
-        }
+/* 📂 MENÚ OCULTO */
+.menu {
+    position: fixed;
+    top: 0;
+    left: -200px;
+    width: 200px;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    padding-top: 60px;
+    transition: 0.3s;
+}
 
-        .navbar button:hover {
-            background: cyan;
-        }
+.menu button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: none;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+}
 
-        /* 📦 SECCIONES */
-        .seccion {
-            display: none;
-            padding-top: 100px;
-            text-align: center;
-        }
+.menu button:hover {
+    background: cyan;
+}
 
-        .active {
-            display: block;
-        }
+/* 📦 SECCIONES */
+.seccion {
+    display: none;
+    padding-top: 100px;
+    text-align: center;
+}
 
-        h1 {
-            font-size: 2.5em;
-        }
+.active {
+    display: block;
+}
 
-        /* 💖 CARTA */
-        #carta {
-            max-width: 500px;
-            margin: auto;
-            font-size: 18px;
-            font-style: italic;
-            color: #ff4d88;
-            white-space: pre-line;
-        }
+/* 💖 CARTA */
+#carta {
+    max-width: 500px;
+    margin: auto;
+    font-size: 18px;
+    font-style: italic;
+    color: #ff4d88;
+    white-space: pre-line;
+}
 
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-    </style>
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+</style>
 </head>
 
 <body>
 
-    <!-- 🎬 VIDEO -->
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="video.mp4" type="video/mp4">
-    </video>
+<!-- 🎬 VIDEO -->
+<video autoplay muted loop id="bg-video">
+    <source src="video.mp4" type="video/mp4">
+</video>
 
-    <!-- 🔝 MENU -->
-    <div class="navbar">
-        <button onclick="mostrar('main')">Inicio</button>
-        <button onclick="mostrar('gaby')">Gaby</button>
-        <button onclick="mostrar('evodio')">Evodio</button>
-        <button onclick="mostrar('margarita')">Margarita</button>
-    </div>
+<!-- ☰ BOTÓN -->
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-    <!-- 🏠 MAIN -->
-    <div id="main" class="seccion active">
-        <h1>Weeeeell, esta sera la nueva pagina de Yalex</h1>
-        <p>Pronto se iran agregando apartados para cada quien</p>
-    </div>
+<!-- 📂 MENÚ -->
+<div class="menu" id="menu">
+    <button onclick="mostrar('main')">Inicio</button>
+    <button onclick="mostrar('gaby')">Gaby</button>
+    <button onclick="mostrar('evodio')">Evodio</button>
+    <button onclick="mostrar('margarita')">Margarita</button>
+</div>
 
-    <!-- 💖 GABY -->
-    <div id="gaby" class="seccion">
-        <h1>💖 Carta 💖</h1>
-        <div id="carta"></div>
-        <canvas id="canvas"></canvas>
-    </div>
+<!-- 🏠 MAIN -->
+<div id="main" class="seccion active">
+    <h1>Weeeeell, esta sera la nueva pagina de Yalex</h1>
+    <p>Pronto se iran agregando apartados para cada quien</p>
+</div>
 
-    <!-- 👤 EVODIO -->
-    <div id="evodio" class="seccion">
-        <h1>Evodio</h1>
-        <p>Aquí irá su contenido</p>
-    </div>
+<!-- 💖 GABY -->
+<div id="gaby" class="seccion">
+    <h1>💖 Carta 💖</h1>
+    <div id="carta"></div>
+    <canvas id="canvas"></canvas>
+</div>
 
-    <!-- 👤 MARGARITA -->
-    <div id="margarita" class="seccion">
-        <h1>Margarita</h1>
-        <p>Aquí irá su contenido</p>
-    </div>
+<!-- 👤 EVODIO -->
+<div id="evodio" class="seccion">
+    <h1>Evodio</h1>
+</div>
 
-    <!-- 🧠 JS SECCIONES -->
-    <script>
-        function mostrar(seccion) {
-            document.querySelectorAll('.seccion').forEach(s => s.classList.remove('active'));
-            document.getElementById(seccion).classList.add('active');
-        }
-    </script>
+<!-- 👤 MARGARITA -->
+<div id="margarita" class="seccion">
+    <h1>Margarita</h1>
+</div>
 
-    <!-- 💖 ANIMACIÓN CARTA -->
-    <script>
-        const mensaje = `Mi amor...
+<script>
+function mostrar(seccion) {
+    document.querySelectorAll('.seccion').forEach(s => s.classList.remove('active'));
+    document.getElementById(seccion).classList.add('active');
+    toggleMenu(); // cerrar menú al seleccionar
+}
+
+function toggleMenu() {
+    let menu = document.getElementById("menu");
+    menu.style.left = (menu.style.left === "0px") ? "-200px" : "0px";
+}
+</script>
+
+<!-- 💖 CARTA -->
+<script>
+const mensaje = `Mi amor...
 
 Desde que llegaste a mi vida,
 todo tiene más color.
@@ -141,59 +155,54 @@ por tenerte.
 
 Te amo hoy y siempre 💖`;
 
-        let i = 0;
-        function escribir() {
-            if (i <= mensaje.length) {
-                document.getElementById("carta").textContent = mensaje.slice(0, i);
-                i++;
-                setTimeout(escribir, 50);
-            }
-        }
-        escribir();
-    </script>
+let i = 0;
+function escribir() {
+    if (i <= mensaje.length) {
+        document.getElementById("carta").textContent = mensaje.slice(0, i);
+        i++;
+        setTimeout(escribir, 50);
+    }
+}
+escribir();
+</script>
 
-    <!-- ✨ CORAZONES Y ESTRELLAS -->
-    <script>
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
+<!-- ✨ EFECTOS -->
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener("resize", resize);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-        let elementos = [];
+let elementos = [];
 
-        function crear(tipo) {
-            elementos.push({
-                x: Math.random() * canvas.width,
-                y: canvas.height,
-                vy: Math.random() * 2 + 1,
-                tipo: tipo
-            });
-        }
+function crear(tipo) {
+    elementos.push({
+        x: Math.random() * canvas.width,
+        y: canvas.height,
+        vy: Math.random() * 2 + 1,
+        tipo: tipo
+    });
+}
 
-        function animar() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+function animar() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            elementos.forEach((e, i) => {
-                e.y -= e.vy;
+    elementos.forEach((e, i) => {
+        e.y -= e.vy;
+        ctx.font = "20px Arial";
+        ctx.fillText(e.tipo, e.x, e.y);
 
-                ctx.font = "20px Arial";
-                ctx.fillText(e.tipo, e.x, e.y);
+        if (e.y < 0) elementos.splice(i, 1);
+    });
 
-                if (e.y < 0) elementos.splice(i, 1);
-            });
+    if (Math.random() < 0.2) crear("♥️");
+    if (Math.random() < 0.1) crear("⭐");
 
-            if (Math.random() < 0.2) crear("♥️");
-            if (Math.random() < 0.1) crear("⭐");
-
-            requestAnimationFrame(animar);
-        }
-        animar();
-    </script>
+    requestAnimationFrame(animar);
+}
+animar();
+</script>
 
 </body>
 </html>
