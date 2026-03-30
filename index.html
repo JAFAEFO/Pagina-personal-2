@@ -31,6 +31,7 @@
             background: rgba(0,0,0,0.6);
             padding: 10px;
             text-align: center;
+            z-index: 10;
         }
 
         .navbar button {
@@ -60,17 +61,21 @@
             font-size: 2.5em;
         }
 
-        textarea {
-            width: 80%;
+        /* 💖 CARTA */
+        #carta {
             max-width: 500px;
+            margin: auto;
+            font-size: 18px;
+            font-style: italic;
+            color: #ff4d88;
+            white-space: pre-line;
         }
 
-        pre {
-            background: black;
-            padding: 10px;
-            margin-top: 10px;
-            display: inline-block;
-            text-align: left;
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -96,16 +101,11 @@
         <p>Pronto se iran agregando apartados para cada quien</p>
     </div>
 
-    <!-- 👤 GABY -->
+    <!-- 💖 GABY -->
     <div id="gaby" class="seccion">
-        <h1>Sección Gaby</h1>
-
-        <textarea id="codigo" rows="10" placeholder="Escribe código Python aquí..."></textarea>
-        <br><br>
-
-        <button onclick="ejecutarPython()">Ejecutar Python</button>
-
-        <pre id="output"></pre>
+        <h1>💖 Carta 💖</h1>
+        <div id="carta"></div>
+        <canvas id="canvas"></canvas>
     </div>
 
     <!-- 👤 EVODIO -->
@@ -128,23 +128,71 @@
         }
     </script>
 
-    <!-- 🐍 PYTHON -->
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
-
+    <!-- 💖 ANIMACIÓN CARTA -->
     <script>
-        let pyodideReady = loadPyodide();
+        const mensaje = `Mi amor...
 
-        async function ejecutarPython() {
-            let pyodide = await pyodideReady;
-            let codigo = document.getElementById("codigo").value;
+Desde que llegaste a mi vida,
+todo tiene más color.
 
-            try {
-                let resultado = await pyodide.runPythonAsync(codigo);
-                document.getElementById("output").textContent = resultado;
-            } catch (error) {
-                document.getElementById("output").textContent = error;
+Cada latido, cada sonrisa,
+me recuerda lo afortunado que soy
+por tenerte.
+
+Te amo hoy y siempre 💖`;
+
+        let i = 0;
+        function escribir() {
+            if (i <= mensaje.length) {
+                document.getElementById("carta").textContent = mensaje.slice(0, i);
+                i++;
+                setTimeout(escribir, 50);
             }
         }
+        escribir();
+    </script>
+
+    <!-- ✨ CORAZONES Y ESTRELLAS -->
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        let elementos = [];
+
+        function crear(tipo) {
+            elementos.push({
+                x: Math.random() * canvas.width,
+                y: canvas.height,
+                vy: Math.random() * 2 + 1,
+                tipo: tipo
+            });
+        }
+
+        function animar() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            elementos.forEach((e, i) => {
+                e.y -= e.vy;
+
+                ctx.font = "20px Arial";
+                ctx.fillText(e.tipo, e.x, e.y);
+
+                if (e.y < 0) elementos.splice(i, 1);
+            });
+
+            if (Math.random() < 0.2) crear("♥️");
+            if (Math.random() < 0.1) crear("⭐");
+
+            requestAnimationFrame(animar);
+        }
+        animar();
     </script>
 
 </body>
