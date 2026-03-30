@@ -63,8 +63,9 @@ body {
 
 /* ICONO IMAGEN */
 .icono-img {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
 }
 
 /* SECCIONES */
@@ -99,15 +100,15 @@ canvas {
 
 <body>
 
-<!-- VIDEO -->
+<!-- 🎬 VIDEO -->
 <video autoplay muted loop id="bg-video">
     <source src="video.mp4" type="video/mp4">
 </video>
 
-<!-- BOTÓN -->
+<!-- ☰ BOTÓN -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<!-- MENÚ -->
+<!-- 📂 MENÚ -->
 <div class="menu" id="menu">
     <button onclick="mostrar('main')">🏠 Inicio</button>
 
@@ -116,7 +117,7 @@ canvas {
     </button>
 
     <button onclick="mostrar('evodio')">
-        <img class="icono-img" src="https://upload.wikimedia.org/wikipedia/en/5/5a/Cruz_Azul.svg">
+        <img class="icono-img" src="cruzazul.png">
         Evodio
     </button>
 
@@ -125,25 +126,25 @@ canvas {
     </button>
 </div>
 
-<!-- MAIN -->
+<!-- 🏠 MAIN -->
 <div id="main" class="seccion active">
     <h1>Weeeeell, esta sera la nueva pagina de Yalex</h1>
     <p>Pronto se iran agregando apartados para cada quien</p>
 </div>
 
-<!-- GABY -->
+<!-- 💖 GABY -->
 <div id="gaby" class="seccion">
     <h1>💖 Carta 💖</h1>
     <div id="carta"></div>
     <canvas id="canvas"></canvas>
 </div>
 
-<!-- EVODIO -->
+<!-- 👤 EVODIO -->
 <div id="evodio" class="seccion">
     <h1>Evodio</h1>
 </div>
 
-<!-- MARGARITA -->
+<!-- 👤 MARGARITA -->
 <div id="margarita" class="seccion">
     <h1>Margarita</h1>
 </div>
@@ -161,7 +162,7 @@ function toggleMenu() {
 }
 </script>
 
-<!-- CARTA -->
+<!-- 💖 CARTA -->
 <script>
 const mensaje = `Mi amor...
 
@@ -185,7 +186,7 @@ function escribir() {
 escribir();
 </script>
 
-<!-- EFECTOS -->
+<!-- ✨ EFECTOS -->
 <script>
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -221,10 +222,6 @@ function animar() {
     requestAnimationFrame(animar);
 }
 animar();
-</script>
-
-</body>
-</html>
 </script>
 
 </body>
